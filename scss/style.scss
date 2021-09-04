@@ -1,0 +1,470 @@
+@import "var";
+@import "mixins";
+@import "basic";
+@import "global";
+
+/* NAV */
+nav {
+  background-color: rgba($primary, 0.9);
+  color: $white;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  &.shadow {
+    box-shadow: 0px 0 20px $textColor;
+  }
+  a {
+    &:hover {
+      color: $accents;
+    }
+  }
+  div {
+    @include flex($y: center);
+    & > a {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    ul {
+      @include flex;
+      @media (max-width: 768px) {
+        transform: scale(0);
+        transform-origin: top right;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        background-color: rgba($primary, 0.9);
+        transition: $transition;
+        &.active {
+          @include flex(center, flex-start, column);
+          width: 100%;
+          transform: scale(1);
+        }
+      }
+      li {
+        text-transform: uppercase;
+        margin-left: 20px;
+        @media (max-width: 768px) {
+          margin: 1em 0px;
+        }
+      }
+    }
+  }
+  button {
+    display: none;
+    font-size: 1.8rem;
+    padding: 0.1em 0.2em;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: $transition;
+    &:hover {
+      color: $accents;
+    }
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+}
+
+/* HEADER */
+
+header {
+  width: 100%;
+  color: $white;
+  @media (max-width: 992px) {
+    height: 100vh;
+    padding-top: 100px;
+  }
+  &.main {
+    background-image: url("../img/header.png");
+    height: 115vh;
+    article {
+      @include flex($y: center);
+      height: 90vh;
+      div {
+        flex: 0 0 50%;
+        @media (max-width: 992px) {
+          flex: 0 0 100%;
+        }
+        h1 {
+          animation: fadeFromTop;
+          animation-duration: 1s;
+        }
+        img {
+          width: 100%;
+          display: block;
+          @media (max-width: 992px) {
+            width: 60%;
+            margin: 20px auto 0;
+            min-width: 250px;
+          }
+        }
+        p {
+          font-size: 1.3rem;
+          font-weight: 300;
+          animation: fadeFromBottom;
+          animation-duration: 1s;
+        }
+      }
+    }
+  }
+  &.second {
+    background-image: url("../img/header-pola.png");
+    height: 60vh;
+    @include flex($y: center);
+    h1 {
+      animation: fadeInRight;
+      animation-duration: 1s;
+    }
+  }
+  @include bgBasic;
+}
+
+/* UVOD */
+
+.uvod {
+  text-align: center;
+  article {
+    @include flex;
+    margin-top: 30px;
+    .card {
+      @include flex(flex-start, space-between, column);
+      text-align: left;
+      flex: 0 0 28%;
+      min-height: 450px;
+      padding: 60px 50px;
+      box-shadow: 0px 10px 10px 0px $shadow;
+      border-radius: 20px;
+      transition: $transition;
+      margin-bottom: 50px;
+      @media (max-width: 992px) {
+        flex: 0 0 47%;
+      }
+      @media (max-width: 768px) {
+        flex: 0 0 100%;
+      }
+      i {
+        font-size: 2.5rem;
+        height: 2.5em;
+        width: 2.5em;
+        line-height: 2.5em;
+        text-align: center;
+        border-radius: 50%;
+        color: $black;
+      }
+      h3 {
+        font-size: 1.8rem;
+        text-transform: uppercase;
+      }
+      &:hover {
+        background: linear-gradient(
+          120deg,
+          rgba($primary, 0.9),
+          rgba($secondary, 0.8)
+        );
+        color: $white;
+        i {
+          background-color: $white;
+          box-shadow: 0 5px 10px $black;
+        }
+      }
+    }
+  }
+}
+
+/* ONAMA */
+.onama {
+  a {
+    color: $secondary;
+  }
+  &-main {
+    @include flex;
+    article {
+      flex: 0 0 48%;
+      @media (max-width: 992px) {
+        flex: 0 0 100%;
+        img {
+          width: 70%;
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+  &-secondary {
+    article {
+      width: 80%;
+      margin: 0 auto;
+      &:last-child {
+        @include flex;
+        div {
+          flex: 0 0 49%;
+          @media (max-width: 992px) {
+            flex: 0 0 100%;
+          }
+        }
+      }
+      p {
+        margin-bottom: 1em;
+      }
+      ul {
+        margin-bottom: 1em;
+        list-style: disc;
+        list-style-position: outside;
+        padding-left: 40px;
+      }
+    }
+  }
+}
+
+/* UTISCI */
+.utisci {
+  background-color: $secondary;
+  .container {
+    @include flex;
+    .card {
+      flex: 0 0 40%;
+      border-radius: 20px;
+      background-color: $white;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid $accents;
+      top: (-1.5rem * 2.5); //font-size * height elemnenta h3
+      @media (max-width: 992px) {
+        flex: 0 0 100%;
+      }
+      div {
+        padding: 30px;
+        @include flex(flex-start, space-between, column);
+      }
+      h3 {
+        background-color: $accents;
+        font-size: 1.5rem;
+        margin: 0;
+        color: $white;
+        text-align: center;
+        line-height: 2.5em; //ista vrednost kao i za height da bi tekst bio u sredini po visini
+        height: 2.5em;
+      }
+      h4 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+      small {
+        margin-top: 20px;
+      }
+    }
+    .slider {
+      overflow: hidden;
+      color: $white;
+      flex: 0 0 58%;
+      @media (max-width: 992px) {
+        flex: 0 0 100%;
+      }
+      small {
+        display: inline-block;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+/* RADIONICE */
+.radionice {
+  &-main {
+    h2 {
+      text-align: center;
+    }
+    article {
+      @include flex(flex-start);
+      margin-top: 50px;
+      & > div {
+        flex: 0 0 33%;
+        padding: 0 15px;
+        margin-bottom: 20px;
+        @media (max-width: 992px) {
+          flex: 0 0 50%;
+        }
+        @media (max-width: 768px) {
+          flex: 0 0 100%;
+        }
+      }
+    }
+  }
+  &-secondary {
+    article {
+      @include flex(flex-start);
+      margin-top: 50px;
+      & > div {
+        flex: 0 0 50%;
+        padding: 0 15px;
+        margin-bottom: 30px;
+        @media (max-width: 992px) {
+          flex: 0 0 100%;
+        }
+      }
+      .featuredImage {
+        h3 {
+          position: absolute;
+          bottom: 0;
+          left: 30px;
+          transform: translate(0, 50%);
+          padding: 5px 10px;
+          font-size: 1.5rem;
+          border-radius: 25px;
+          text-align: left;
+          color: $white;
+          background-color: rgba($black, 0.7);
+          @media (max-width: 768px) {
+            left: 50%;
+            transform: translate(-50%, 50%);
+            width: 90%;
+          }
+          @media (max-width: 576px) {
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* FOOTER */
+footer {
+  background-color: $textColor;
+  color: $white;
+
+  article {
+    &:first-child {
+      @include flex;
+      & > div {
+        flex: 0 0 30%;
+        @media (max-width: 992px) {
+          flex: 0 0 47%;
+        }
+        @media (max-width: 768px) {
+          flex: 0 0 100%;
+        }
+        img {
+          width: 80%;
+          min-width: 250px;
+          margin-bottom: 20px;
+          @media (max-width: 992px) {
+            width: 50%;
+          }
+        }
+        p {
+          margin-bottom: 20px;
+        }
+        a:hover {
+          color: $accents;
+        }
+        i {
+          font-size: 2.3rem;
+          margin-right: 5px;
+          transition: $transition;
+          @media (max-width: 992px) {
+            font-size: 1.5rem;
+          }
+          &:hover {
+            color: $gray;
+          }
+        }
+      }
+    }
+    &:last-child {
+      border-top: 1px solid $gray;
+      text-align: center;
+      padding: 40px 0 100px;
+    }
+  }
+}
+
+/* BLOG */
+.blog {
+  article {
+    @include flex(flex-start);
+    margin-top: 50px;
+    & > div {
+      flex: 0 0 50%;
+      padding: 0 15px;
+      margin-bottom: 30px;
+      @media (max-width: 992px) {
+        flex: 0 0 100%;
+      }
+    }
+    h3 {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 0px;
+      border-radius: 25px;
+      width: 90%;
+      text-align: center;
+      color: $white;
+      background-color: rgba($black, 0.7);
+      @media (max-width: 576px) {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+/* SINGLE PAGE */
+.single {
+  @include flex;
+  article {
+    flex: 0 0 68%;
+    @media (max-width: 768px) {
+      flex: 0 0 100%;
+    }
+    cite {
+      margin: 1em 0;
+    }
+    h3 {
+      margin-top: 10px;
+    }
+    p {
+      text-align: justify;
+      margin-bottom: 1em;
+    }
+  }
+  aside {
+    flex: 0 0 30%;
+    @media (max-width: 768px) {
+      flex: 0 0 100%;
+    }
+  }
+  .featuredImage {
+    margin-bottom: 20px;
+    img {
+      box-shadow: $boxShadow;
+      &:hover {
+        transform: unset;
+      }
+    }
+  }
+  &-radionica {
+    h4 {
+      font-weight: 800;
+    }
+    h5 {
+      font-weight: 800;
+      margin: 0 0 1em;
+    }
+    h6 {
+      margin: 0 0 1em;
+      font-weight: 800;
+    }
+    hr {
+      margin: 20px auto;
+      background-color: $gray;
+    }
+  }
+}
